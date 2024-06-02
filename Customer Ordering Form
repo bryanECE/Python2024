@@ -1,0 +1,526 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Mar  9 20:52:25 2024
+
+@author: bryanbrizo
+"""
+# ------------------------------------------------------------------- 
+#                      A1 - Question 1
+# Customers details: You are requested to enable the customer to 
+# insert their details to create a new account. Each customer  
+# will be asked to insert the following:
+#   a) the customer’s name,
+#   b) mobile number,
+#   c) year of birth,
+#   d) current city
+#   e) email address to register for promotions.]
+
+# The application must calculate the customer's age 
+# (assume the current year is always 2023) and confirm 
+# to the customer with a greeting message by displaying 
+# all the details if the customer is more than 21 years of age.
+# ------------------------------------------------------------------- 
+print('\n------------------------------------------------')
+print('B2B Mobile Ordering Program: Customer Details \n')
+print('Developed by: Creative Software Company')
+print('------------------------------------------------\n')
+print('***** CUSTOMER DETAILS ***** \n')
+print('Please enter your details to create your account.')
+current_year= int(2023)
+first_name=input("Your first name: ")
+last_name=input("Your last name: ")
+if len(first_name) > 0: #Validate that there is an input
+    if len(last_name) > 0: #Validate that there is an input
+        customer_mobile=input('Enter your mobile number: ')
+        customer_birthyear=int(input('Enter your year of birth: '))
+        customer_currentcity=input('Enter your current city: ')
+        customer_email=input('Enter your email address (for promotions): ')
+        print('\n------------------------------------------------------------\n')
+        customer_age= current_year - customer_birthyear
+        print ('Hi', first_name,'. Please check the following details below:')
+        print('First Name:', first_name)
+        print('Last Name:', last_name)
+        print('Mobile Number:',customer_mobile)
+        print('Year of birth:',customer_birthyear)
+        print('Current city:',customer_currentcity)
+        print('Email Address:',customer_email)
+        print('Age:',customer_age,'years old')
+        confirmation=input("\n[Y/N] Are the details presented above correct? ") 
+        if confirmation == 'Y': #Confirmation of User Details
+            if (customer_age>21): #Validation of Age (21)
+                print("\nCongratulations! You're moving on to the next step. \n")
+            else:
+                print("\nSorry you're below 21 years old.")
+                print('\nGood Bye! Come again!')
+        elif confirmation == 'N': #If user answered "N" in the confirmation stage
+            print("\nPlease run the program again and check the details! Thank you. \n")
+        else: #User didn't input "Y" or "N" in the confirmation stage
+            print('Confirmation Error. Please re-input your details carefully.')
+    else:
+        print("ERROR: Please input your last name! ")
+else:
+    print("ERROR: Please input your first name! ")
+# ------------------------------------------------------------------- 
+#                      A1 - Question 2
+# Restaurant Capacity: Write a program to advise the restaurant manager on 
+# how many customers the restaurant can accommodate based on the restaurant  
+# dimensions. Your program will ask the manager to insert the width and
+# length of the restaurant in centimetres. Assuming that a person occupies 
+# 1.3 square meters of space. The program should output the number of people
+# that can be accommodated in the restaurant (The output should be an integer).
+#   
+# Note: if the calculated number of people that the restaurant can accommodate
+# is more than 70, the program must print the message that A Maximum of 70 
+# persons are allowed.
+# ------------------------------------------------------------------- 
+print('\n------------------------------------------------')
+print('B2B Mobile Ordering Program: Restaurant Capacity \n')
+print('Developed by: Creative Software Company')
+print('------------------------------------------------\n')
+print('***** RESTAURANT CAPACITY ***** \n')
+valid_num = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9') #Tuple for Number Validation
+unchecked_width=input('Please input the width of the restaurant in centimeters: ')#Width in String
+for char in unchecked_width: #Checking if the width is a number
+    if char not in valid_num:
+        print('Enter a VALID NUMBER') #Message in console if Width is not a number
+        break
+else:
+    unchecked_length=input('Please input the length of the restaurant in centimeters: ')
+    for char in unchecked_length: #Checking if the length is a number
+        if char not in valid_num:
+            print('Enter a VALID NUMBER') #Message in console if Length is not a number
+            break
+    restaurant_width=int(unchecked_width) #Converting String(Width) to an Integer
+    restaurant_length=int(unchecked_length) #Converting String(Length) to an Integer
+    if restaurant_length > 0: # Checking if input is a Positive Number
+        valid_width=int(restaurant_width)
+        valid_length=int(restaurant_length)
+        width_conversion= valid_width/100 #Converting into Meters
+        length_conversion= valid_length/100
+        space_per_person=1.3  #Space occupied by a person in sqm
+        print('\n')
+        total_restaurant_area= width_conversion * length_conversion
+        print('The total area of the restaurant is',total_restaurant_area,'square meters \n')
+        restaurant_capacity= int(total_restaurant_area/space_per_person)
+        print('The restaurant can accomodate around',restaurant_capacity,'people.\n')
+        if restaurant_capacity>70: #Checking if the restauranct can accomodate 70 people
+            print('Warning! Only a maximum of 70 persons are allowed inside the restaurant.')
+        else:
+            print('Thank you!')
+    else:
+        print('Enter a valid positive value for the length.') #Message when user inputs a negative number
+# ------------------------------------------------------------------- 
+#                      A1 - Question 3
+# At the end of each week the manager would like to assess the average per person 
+# sale and compare it to the previous weekend. Write a program to ask the 
+# manager for the following input:  
+# I.
+# Current weekend’s day wise sale and number of persons visited.
+# II.
+# Last weekend’s day wise sale and number of persons visited.
+# NOTE:
+#   1. You must use a list.
+#   2. The weekend includes Friday, Saturday, and Sunday.
+# ------------------------------------------------------------------- 
+print('\n------------------------------------------------')
+print('B2B Mobile Ordering Program: Average Per Person Sale \n')
+print('Developed by: Creative Software Company')
+print('------------------------------------------------\n')
+print('***** AVERAGE SALE ***** \n')
+day = ["Friday", "Saturday", "Sunday"]
+weekday = day.copy() # List methods - copy() function. Copy original list
+for i in range(0,3): # Current Week
+    print('What is the total sale for this',day[i],'? ') #Asking user for the sales this week
+    day[i]=float(input()) # Sales Input 
+current_weekend_sale= sum(day[0:]) #Sum of the 3 inputs
+current_weekend_visitor=int(input('\nHow many customers visited this weekend? '))
+current_averagesale=current_weekend_sale/current_weekend_visitor
+print('\n')
+for f in range(0,3): # Last Week
+    print('What is the total sale for last',weekday[f],'? ')
+    weekday[f]=float(input())
+last_weekend_sale=sum(weekday[0:])
+last_weekend_visitor=int(input('\nHow many customers visited last weekend? '))
+last_averagesale=last_weekend_sale/last_weekend_visitor
+print('\n')
+print("This weekend's average per person sale is",round(current_averagesale,2), 'AUD per person') #round to 2 decimal places
+print("Last weekend's average per person sale is",round(last_averagesale,2), 'AUD per person')
+difference_ave=current_averagesale - last_averagesale
+print('\n')
+if current_averagesale > last_averagesale: # When this week's sales are higher than last
+   print("This week's average per person sale is higher than last week's average by",round(difference_ave,2),'AUD')
+elif current_averagesale == last_averagesale: #EVEN SALES
+    print("This week's average per person sale is the same as last week's.")
+else:
+   absolute_diff=last_averagesale-current_averagesale # Last week's sales are higher
+   print("This week's average per person sale is lower compared to last week's average by",round(absolute_diff,2),'AUD')
+# ------------------------------------------------------------------- 
+#                      A1 - Question 4
+# Create a program to calculate and print the amount of change 
+# to be returned to the customer, after paying the bill, based 
+# on the manager's inputs in the system.
+
+# Sample Input:
+# Invoice Number: P001
+# Total Invoice amount (In Dollars): 200
+# Amount of Tip (In Cents): 10
+# Total Payment received by Card: 160
+# Service Charge on Payment made by Card: 4%
+# Total Payment received in Cash (In Dollars): 100
+# Output:
+# Change to be returned to the customer (In Dollars)
+# against Invoice number P001 is: 53.50
+
+# Note: If the return to customer amount is negative, 
+# then it must print “Outstanding amount against 
+# Invoice number P001 and need to be paid by customer:”, 
+# and the amount need to be paid.
+# ------------------------------------------------------------------- 
+print('\n------------------------------------------------')
+print('B2B Mobile Ordering Program: Change Returned \n')
+print('Developed by: Creative Software Company')
+print('------------------------------------------------\n')
+print('***** CHANGE AMOUNT ***** \n')
+valid_num = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9','.') #Tuple function for numbers
+invoice_num=input('Input invoice number: ') #Invoice number in string
+untested_invoice_amount=input('Input invoice amount (in Dollars): ') #Invoice amount in string
+for char in untested_invoice_amount: #Testing if amount is a number
+    if char not in valid_num:
+        print('Error! Enter a VALID NUMBER')
+        break
+else: #Amount is a valid number
+    invoice_amount=float(untested_invoice_amount) # Conversion of amount to a float type
+    untested_tip_amount=input('Input tip amount (in Cents): ')
+    for char in untested_tip_amount: #Testing if tip is a number
+        if char not in valid_num:
+            print('Error! Enter a VALID NUMBER')
+            break
+    else:
+        tip_amount=float(untested_tip_amount)
+        untested_cardpayment_received=input('Input the total payment received by card: ')
+        for char in untested_cardpayment_received: #Testing if card payment amount is a number
+            if char not in valid_num:
+                print('Error! Enter a VALID NUMBER')
+                break
+        else:
+            cardpayment_received=float(untested_cardpayment_received)
+            untested_cardpayment_servicecharge=input('Input the service charge on the payment made by card (%): ')
+            for char in untested_cardpayment_servicecharge: #Testing if service charge is a number
+                if char not in valid_num:
+                    print('Error! Enter a VALID NUMBER')
+                    break
+            else:
+                cardpayment_servicecharge=float(untested_cardpayment_servicecharge)
+                untested_payment_cash=input('Input the total payment received in cash (in Dollars): ')
+                for char in untested_payment_cash: #Testing if cash payment is a number
+                    if char not in valid_num:
+                        print('Error! Enter a VALID NUMBER')
+                        break
+                else:
+                    payment_cash=float(untested_payment_cash)
+                    total_cardmultiplier = float(cardpayment_servicecharge/100) #Initial with service charge
+                    total_customerpayment= cardpayment_received+payment_cash     
+                    total_amount= invoice_amount+(tip_amount/100)+ (cardpayment_received*total_cardmultiplier)
+                    customer_change= total_customerpayment - total_amount
+                    if customer_change > 0: #Customer has a change
+                        print('\nThe change to be returned to the customer (in Dollars) against invoice number',invoice_num,'is $',customer_change)
+                    elif customer_change == 0: #Exact payment
+                        print('\nThe customer has no change against invoice number',invoice_num)
+                    else:
+                        outstanding_payment=abs(customer_change) #Charge exceeds the payment
+                        print('\nOutstanding amount against Invoice number',invoice_num,'. This needs to be paid by the customer.')
+                        print('\nThe amount that needs to be paid by the customer is',outstanding_payment)
+# ------------------------------------------------------------------- 
+#                      A1 - Question 5
+# Write the program to provide the user with an amount he/she needs to pay including 
+# the delivery and packaging charges. The program should ask the user for the 
+# following input:
+
+# a) His full address
+# b) The amount of order placed
+# c) The distance in KM between the address provided and the restaurant
+# ------------------------------------------------------------------- 
+print('\n------------------------------------------------')
+print('B2B Mobile Ordering Program: DELIVERY CHARGES \n')
+print('Developed by: Creative Software Company')
+print('------------------------------------------------\n')
+print('***** AMOUNT with DELIVERY ***** \n')
+valid_num = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9') # Tuple for number validation
+full_address=input("Input the customer's full address: ") #User details
+untested_order_amount=input('Enter the amount of the placed order: ') #Order amount
+for char in untested_order_amount: # Testing if amount is a valid number
+    if char not in valid_num:
+        print('Error! Enter a VALID NUMBER') #Error message
+        break
+    else:
+        order_amount=float(untested_order_amount)
+        untested_distance_customer=input("What is the distance in KM between the customer's address and the restaurant? ")
+        for char in untested_distance_customer: #Checking if distance entered is a number
+            if char not in valid_num:
+                print('Error! Enter a VALID NUMBER')
+                break
+        else:
+            distance_customer=float(untested_distance_customer) 
+            if distance_customer > 12:
+                print("\nSorry! No Delivery Can be done.") #Address is more than 12 KM
+                print('\nGood Bye!')
+            else:
+                if order_amount <= 20: # Order amount is less than or equal to 20 AUD
+                    if 0 <= distance_customer <= 4:
+                        new_amount=order_amount+3
+                    elif 4 < distance_customer <= 8:
+                        new_amount=order_amount+6
+                    elif 8 < distance_customer <= 12:
+                        new_amount=order_amount+10
+                    else:
+                        print("\nSorry! No Delivery Can be done.")
+                elif 20 < order_amount <= 35: # Order amount between 20.01 AUD to 35 AUD
+                    if 0 <= distance_customer <= 4:
+                        new_amount=(order_amount*1.1)+3
+                    elif 4 < distance_customer <= 8:
+                        new_amount=(order_amount*1.1)+6
+                    elif 8 < distance_customer <= 12:
+                        new_amount=(order_amount*1.1)+10
+                    else:
+                        print("\nSorry! No Delivery Can be done.")
+                elif 35 < order_amount <= 50: # Order amount between 35.01 AUD to 50 AUD
+                    if 0 <= distance_customer <= 4:
+                        new_amount=(order_amount*1.08)+3
+                    elif 4 < distance_customer <= 8:
+                        new_amount=(order_amount*1.08)+6
+                    elif 8 < distance_customer <= 12:
+                        new_amount=(order_amount*1.08)+10
+                    else:
+                        print("\nSorry! No Delivery Can be done.")          
+                elif 50 < order_amount: # Order amount is more than 50 AUD
+                    if 0 <= distance_customer <= 4:
+                        new_amount=(order_amount*1.06)+3
+                    elif 4 < distance_customer <= 8:
+                        new_amount=(order_amount*1.06)+6
+                    elif 8 < distance_customer <= 12:
+                        new_amount=(order_amount*1.06)+10
+                    else:
+                        print("\nSorry! No Delivery Can be done.") 
+                else:
+                    print('...')
+                print("The total amount of the order including the packaging and delivery charges going to",full_address,"is $",new_amount)
+    break
+# ------------------------------------------------------------------- 
+#                      A1 - Question 6
+# Write a program to calculate the total charges of a placed order at the restaurant. 
+# Additional charges apply based on the order type selected from the options of:
+
+# 1- dine in: Additional service charges of 8% apply
+# 2- pick up: no additional charges
+# 3- delivery: additional delivery charges of 10% apply
+
+# The program should ask the user to insert the order base cost in AUD and the 
+# order type (1 or 2 or 3), and then the program should output the total amount to be paid.
+# ------------------------------------------------------------------- 
+print('\n------------------------------------------------')
+print('B2B Mobile Ordering Program: PLACED ORDER CHARGES\n')
+print('Developed by: Creative Software Company')
+print('------------------------------------------------\n')
+print('***** PLACED ORDER CHARGES ***** \n')
+print('Please choose a number from the following choices below regarding on what type of order the customer placed.')
+print('[1]- Dine in: Additional service charges of 8% apply')
+print('[2]- Pick up: No additional charges')
+print('[3]- Delivery: Additional delivery charges of 10% apply')
+print('\n')
+valid_num = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9') #Tuple for number validation
+untested_base_cost=input('Please enter the order base cost in AUD: ') #Base cost in string
+if untested_base_cost == "": #If input is empty
+    print('Error! No input.')
+for char in untested_base_cost: #Checking if user didn't input a valid number for the cost
+    if char not in valid_num:
+        print('Error! Enter a VALID NUMBER')
+        break
+    else:
+        base_cost=float(untested_base_cost) #Base cost convertion from string to float
+        order_num = ('1','2','3') #Tuple for order type
+        new_order_type=input('What type of order did the customer placed? ')
+        if new_order_type == "": #Checking if input is empty
+            print('Error! No input.')
+        for char in new_order_type: #Checking if input is not from the Tuple above (1,2,3)
+            if char not in order_num:
+                print('Error! Enter a VALID NUMBER')
+                break
+            else:
+                order_type=int(new_order_type) #If-else for order type
+                if order_type == 1:
+                    print('The total amount to be paid with service charge in AUD is $',round(base_cost*1.08,3))
+                elif order_type == 2:
+                    print('The total amount to be paid for the pick up order in AUD is $',base_cost)
+                elif order_type == 3:
+                    print('The total amount to be paid with the delivery charge in AUD is $',round(base_cost*1.1,3))
+                else:
+                    print('\nError! Good Bye!')
+            print('\nThank you. Good Bye!')
+    break
+# ------------------------------------------------------------------- 
+#                      A1 - Question 7
+# Write a temperature conversion program. The program should offer two forms of conversions:
+
+# 1- From Centigrade to Fahrenheit
+# 2- From Fahrenheit to Centigrade
+
+# The program should ask the user to insert the temperature value and then conversion option (1 or 2).
+#   • The program should output the converted temperature.
+#   • Your program should print a warning message for invalid values of temperature.
+#   • Any Other option selected: Invalid Entry.
+# ------------------------------------------------------------------- 
+print('\n------------------------------------------------')
+print('B2B Mobile Ordering Program: TEMPERATURE CONVERSION\n')
+print('Developed by: Creative Software Company')
+print('------------------------------------------------\n')
+print('***** TEMPERATURE CONVERSION PROGRAM ***** \n')
+print('Please choose a conversion option below. ')
+print('[1]- Centigrade to Fahrenheit')
+print('[2]- Fahrenheit to Centigrade')
+print('\n')
+valid_num = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9','.','-') #Tuple for numbers
+temp_num = ('1','2') #Tuple for the forms of conversion
+untested_temp_value=input('Enter the temperature value: ')
+if untested_temp_value == "": #Checking if the input is empty
+    print('Error! No input.')
+for char in untested_temp_value: #Testing if Temperature Value is not a number
+    if char not in valid_num:
+        print('Error! Enter a VALID NUMBER')
+        break
+    else:
+        temp_value=float(untested_temp_value)
+        untested_temp_conversion=input('Enter the conversion option: ') #Forms of conversion
+        if untested_temp_conversion == "": #Checking if input is empty
+            print('Error! No input.')
+        for char in untested_temp_conversion:
+            if char not in temp_num: #Checking if user only input 1 or 2
+                print('Error! Enter a VALID NUMBER')
+                break
+            else:
+                temp_conversion=int(untested_temp_conversion)
+                if temp_conversion == 1:
+                    temp_to_fahr=(temp_value*(9/5))+32 #Celsius to Farenheit
+                    print('The celsius value converted to fahrenheit is',round(temp_to_fahr,3),'degF.')
+                    if temp_to_fahr < -460:
+                        print('\nWarning! The converted temperature is lower than ABSOLUTE ZERO, which is the lowest temperature possible.')
+                    else:
+                        print('\n')
+                elif temp_conversion == 2:
+                    temp_to_cels=(temp_value-32)*(5/9) #Farenheit to Celsius
+                    print('The fahrenheit value converted to centigrade is',round(temp_to_cels,3),'degC.')
+                    if temp_to_cels < -273.15: #Absolute Zero Checking
+                        print('\nWarning! The converted temperature is lower than ABSOLUTE ZERO, which is the lowest temperature possible.')
+                    else:
+                        print('\n')
+                else:
+                    print('\nInvalid Entry!')
+    break
+# ------------------------------------------------------------------- 
+#                      A1 - Question 8
+# Write a program to help the manager calculating the net monthly income of the employee 
+# after the tax is deducted. Assume a fixed income tax of 18 %. The program should ask 
+# the manager to insert the following input:
+
+# a) the position of the employee (chef, waiter, delivery or cleaner).
+# b) the number of monthly hours the employee worked.
+
+# If hours are entered in decimal format, the calculations will be executed by rounding 
+# the hours to the nearest positive value.
+
+# The pay rate is calculated as follows:
+#   • Chef $30 Per hour,
+#   • Waiter $28 Per hour,
+#   • Delivery $25 Per hour,
+#   • Cleaner $ 24 Per hour
+# Note: you should ensure a correct output regardless of the input case 
+# (upper case, lower case and more).
+# ------------------------------------------------------------------- 
+print('\n------------------------------------------------')
+print('B2B Mobile Ordering Program: EMPLOYEE MONTHLY INCOME\n')
+print('Developed by: Creative Software Company')
+print('------------------------------------------------\n')
+print('***** EMPLOYEE NET MONTHLY INCOME ***** \n')
+print('\nWhat is the position of the employee? ')
+position= ["Chef", "Waiter","Delivery","Cleaner"] #List of positions
+for x in position: #Printing all the position in the list
+    print(x)
+employee_position=input('\nANSWER: ') #User inputs the position
+final_position=employee_position.lower() #Input is converted to lower case
+valid_val = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.')
+untested_hours_worked=input('\nInput the number of monthly hours the employee worked: ')
+for char in untested_hours_worked:
+    if char not in valid_val: #Checking if the work hours is a number
+        print('Error! Enter a VALID NUMBER')
+        break
+    else:
+        hours_worked=float(untested_hours_worked)
+        rnd_hrs=round(hours_worked,0) #Rounding to the nearest positive number
+        intax_mul= 1.0-0.18 # Multiplier (since there is a fixed income tax)
+        if final_position == 'chef': #CHEF
+            print('The monthly income of the Chef is $',(round(rnd_hrs*30*intax_mul,2)))
+        elif final_position == 'waiter': #WAITER
+            print('The monthly income of the Waiter is $',(round(rnd_hrs*28*intax_mul,2)))
+        elif final_position == 'delivery': #DELIVERY
+            print('The monthly income of the Delivery is $',(round(rnd_hrs*25*intax_mul,2)))     
+        elif final_position == 'cleaner': #CLEANER
+            print('The monthly income of the Cleaner is $',(round(rnd_hrs*24*intax_mul,2)))
+        else:
+            print('\nInvalid Entry!')
+    break
+# ------------------------------------------------------------------- 
+#                      A1 - Question 9
+# Create a program that ask the user to enter user credential signing up a new account. 
+# The program should ask the user to insert the following:
+#   1. mobile number
+#   2. password
+
+# The program should print the output “Valid credentials” if:
+#   1. the mobile number is having exactly 10 digits.
+#   2. the password has a minimum of 7 characters and maximum 11 characters.
+#   3. The password must contain at least one special character, either @ or $
+#   4. The password must end with a digit
+#       Note: The program should print “invalid credentials” otherwise.
+
+# Important: Incorporating input validation is a critical step to guarantee 
+# the proper functioning of the aforementioned programs and prevent any unexpected 
+# errors. Input validation plays a pivotal role in addressing possible problems like 
+# invalid data, values beyond permissible ranges, or erroneous user inputs.
+# ------------------------------------------------------------------- 
+print('\n------------------------------------------------')
+print('B2B Mobile Ordering Program: NEW ACCOUNT\n')
+print('Developed by: Creative Software Company')
+print('------------------------------------------------\n')
+print('***** NEW ACCOUNT SIGN UP ***** \n')
+
+print('*** Password Guidelines! ***')
+print('> Mobile number should have exactly 10 digits.')
+print('> Password must have a minimum of 7 characters and maximum 11 characters.')
+print('> Password must contain at least one special character, either @ or $.')
+print('> Password must end with a digit.')
+print('\n')
+    
+specialCharacters = ['$','@'] #Valid special characters for password
+mobile_number=input('Input Mobile Number: ')
+valid_num = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9') #Tuple for valid numbers
+for char in mobile_number:
+    if char not in valid_num: #Checking if mobile number inputted are valid digits
+        print('Error! Enter a VALID NUMBER')
+        break
+    else:
+        user_password=input('Enter your password: ')               
+        if len(mobile_number) != 10: #Checking if mobile number has 10 digits
+                print('\nInvalid Credentials! Mobile Number Must be exactly 10.')                
+        else:
+            if 7 <= len(user_password) <= 11: #Checking password length (must be from 7 to 11)
+                if not any(char in specialCharacters for char in user_password): #Special character
+                    print('\nInvalid Credentials! Password must contain a special character (@ or $).')
+                else:
+                    if user_password[-1].isdigit() == True: #Checking if password ends with a digit
+                        print('\nCongratulations!')
+                    else:
+                        print('\nInvalid Password! The password must end in a digit')   
+            else:   
+                print('\nInvalid Password Length! (Input only from 7 to 11 characters)')
+    break
+# ------------------------------------------------------------------- 
